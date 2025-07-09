@@ -12,3 +12,9 @@ Content-Type: application/json
   "description": "전통 비빔밥, 고소한 참기름 향 가득",
   "reorder": false
 }
+
+
+### 주문 조회 테스트
+@orderId = variable value
+GET http://localhost:8080/api/order/{{orderId}}
+Accept: application/json
