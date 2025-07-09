@@ -3,7 +3,7 @@ package com.delog.server.aggregate.order.presentation.dto
 import com.delog.server.aggregate.order.domain.FoodType
 import com.delog.server.aggregate.order.domain.entity.DeliveryOrderEntity
 
-class GetDeliveryOrderInfoDTO {
+class GetDeliveryOrderInfoDto {
 
     data class Response(
         val orderId: String?,
@@ -18,7 +18,7 @@ class GetDeliveryOrderInfoDTO {
     ) {
 
         companion object {
-            fun mapToResponse(entity: DeliveryOrderEntity): GetDeliveryOrderInfoDTO.Response =
+            fun mapToResponse(entity: DeliveryOrderEntity): GetDeliveryOrderInfoDto.Response =
                 Response(
                     orderId = entity.orderId,
                     title = entity.menuTitle,

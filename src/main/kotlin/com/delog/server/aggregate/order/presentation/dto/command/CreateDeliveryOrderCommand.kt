@@ -10,12 +10,18 @@ data class CreateDeliveryOrderCommand(
     val count: Int = 1,
     val peopleNumber: Int = 1,
     val category: FoodType,
-    val imageUrl: String = "",
-    val description: String = "",
+    val imageUrl: String,
+    val description: String,
     val willReorder: Boolean = false
 ) {
 
     init {
+
+        isValidPrice()
+
+    }
+
+    private fun isValidPrice(): Nothing {
 
         require(price.scale() <= 0) {
             "해당 금액은 소수점이 들어와있습니다. : $price"
@@ -24,12 +30,13 @@ data class CreateDeliveryOrderCommand(
         val priceInt = price.toBigIntegerExact()
 
         val valid = listOf(
+
             BigInteger.valueOf(100),
             BigInteger.valueOf(1_000),
             BigInteger.valueOf(10_000),
             BigInteger.valueOf(100_000),
 
-        ).any { divisor ->
+            ).any { divisor ->
             priceInt % divisor == BigInteger.ZERO
         }
 
@@ -37,5 +44,7 @@ data class CreateDeliveryOrderCommand(
             "가격은 100보다 크고 10의 배수여야 합니다. : $priceInt"
         }
         TODO(" 가격 관련 test 작성")
+
     }
+
 }

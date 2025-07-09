@@ -5,7 +5,7 @@ import com.delog.server.aggregate.order.domain.entity.DeliveryOrderEntity
 import com.delog.server.aggregate.order.presentation.dto.command.CreateDeliveryOrderCommand
 import java.math.BigDecimal
 
-class CreateDeliveryOrderInfoDTO {
+class CreateDeliveryOrderInfoDto {
 
     data class Request(
         val title: String,
@@ -31,7 +31,6 @@ class CreateDeliveryOrderInfoDTO {
             )
     }
 
-    /** API 응답 바디용 DTO */
     data class Response(
         val orderId: String?,
         val title: String,

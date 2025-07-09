@@ -16,6 +16,7 @@ class DeliveryDeliveryOrderAdapter(
 
         val createdEntity = deliveryOrderRepository.save(entity);
         return createdEntity;
+
     }
 
     override fun getOrderInfoByOrderId(orderId: String): DeliveryOrderEntity {
@@ -24,4 +25,5 @@ class DeliveryDeliveryOrderAdapter(
                 EntityNotFoundException("해당 하는 id로 된 엔티티 data가 없습니다. : $orderId")
             }
     }
+
 }
