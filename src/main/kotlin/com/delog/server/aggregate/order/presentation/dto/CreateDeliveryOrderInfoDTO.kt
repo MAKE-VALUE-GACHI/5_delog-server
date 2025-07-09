@@ -2,7 +2,7 @@ package com.delog.server.aggregate.order.presentation.dto
 
 import com.delog.server.aggregate.order.domain.FoodType
 import com.delog.server.aggregate.order.domain.entity.DeliveryOrderEntity
-import com.delog.server.aggregate.order.presentation.dto.command.DeliveryOrderCommand
+import com.delog.server.aggregate.order.presentation.dto.command.CreateDeliveryOrderCommand
 import java.math.BigDecimal
 
 class CreateDeliveryOrderInfoDTO {
@@ -18,8 +18,8 @@ class CreateDeliveryOrderInfoDTO {
         val willReorder: Boolean = false
     ) {
 
-        fun mapToCommand(): DeliveryOrderCommand =
-            DeliveryOrderCommand(
+        fun mapToCommand(): CreateDeliveryOrderCommand =
+            CreateDeliveryOrderCommand(
                 title = title,
                 price = BigDecimal(price),
                 count = count,
