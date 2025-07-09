@@ -1,0 +1,14 @@
+### 주문 생성 테스트
+POST http://localhost:8080/api/order
+Content-Type: application/json
+
+{
+  "title": "Bibimbap",
+  "price": 12000,
+  "count": 2,
+  "peopleNumber": 3,
+  "category": "KOREAN_FOOD",
+  "imageUrl": "https://example.com/images/bibimbap.jpg",
+  "description": "전통 비빔밥, 고소한 참기름 향 가득",
+  "reorder": false
+}
