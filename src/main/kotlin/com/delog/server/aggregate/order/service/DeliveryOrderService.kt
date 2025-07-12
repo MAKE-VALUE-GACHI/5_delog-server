@@ -2,8 +2,8 @@ package com.delog.server.aggregate.order.service
 
 import com.delog.server.aggregate.order.domain.entity.DeliveryOrderEntity
 import com.delog.server.aggregate.order.persistence.jpa.repository.DeliveryOrderRepository
-import com.delog.server.aggregate.order.presentation.dto.CreateDeliveryOrderDto
-import com.delog.server.aggregate.order.presentation.dto.UpdateDeliveryOrderDto
+import com.delog.server.aggregate.order.presentation.dto.CreateDeliveryOrderRequest
+import com.delog.server.aggregate.order.presentation.dto.UpdateDeliveryOrderRequest
 import com.delog.server.aggregate.order.presentation.mapper.DeliveryOrderMapper
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
@@ -17,7 +17,7 @@ class DeliveryOrderService(
 ) {
 
     @Transactional
-    fun createOrder(request: CreateDeliveryOrderDto): DeliveryOrderEntity {
+    fun createOrder(request: CreateDeliveryOrderRequest): DeliveryOrderEntity {
         val entity = deliveryOrderMapper.toEntity(request)
         return deliveryOrderRepository.save(entity)
     }
@@ -40,7 +40,7 @@ class DeliveryOrderService(
     }
 
     @Transactional
-    fun updateOrder(id:Long, request: UpdateDeliveryOrderDto): DeliveryOrderEntity {
+    fun updateOrder(id:Long, request: UpdateDeliveryOrderRequest): DeliveryOrderEntity {
         val existingEntity = findOrderById(id)
 
         existingEntity.apply {

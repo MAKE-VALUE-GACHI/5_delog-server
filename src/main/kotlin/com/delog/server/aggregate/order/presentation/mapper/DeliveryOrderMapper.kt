@@ -1,14 +1,14 @@
 package com.delog.server.aggregate.order.presentation.mapper
 
 import com.delog.server.aggregate.order.domain.entity.DeliveryOrderEntity
-import com.delog.server.aggregate.order.presentation.dto.CreateDeliveryOrderDto
-import com.delog.server.aggregate.order.presentation.dto.GetDeliveryOrderDto
+import com.delog.server.aggregate.order.presentation.dto.CreateDeliveryOrderRequest
+import com.delog.server.aggregate.order.presentation.dto.GetDeliveryOrderResponse
 import org.springframework.stereotype.Component
 
 @Component
 class DeliveryOrderMapper {
 
-    fun toEntity(dto: CreateDeliveryOrderDto): DeliveryOrderEntity {
+    fun toEntity(dto: CreateDeliveryOrderRequest): DeliveryOrderEntity {
         return DeliveryOrderEntity(
             menuName = dto.menuName,
             price = dto.price,
@@ -23,8 +23,8 @@ class DeliveryOrderMapper {
         )
     }
 
-    fun toResponse(entity: DeliveryOrderEntity): GetDeliveryOrderDto {
-        return GetDeliveryOrderDto(
+    fun toResponse(entity: DeliveryOrderEntity): GetDeliveryOrderResponse {
+        return GetDeliveryOrderResponse(
             id = entity.id,
             menuName = entity.menuName,
             price = entity.price,

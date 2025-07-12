@@ -10,7 +10,7 @@ import jakarta.validation.constraints.PositiveOrZero
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
-data class CreateDeliveryOrderDto (
+data class UpdateDeliveryOrderRequest (
     @field:NotBlank(message = "메뉴명은 필수입니다.")
     val menuName: String,
 
@@ -19,10 +19,10 @@ data class CreateDeliveryOrderDto (
     val price: BigDecimal,
 
     @field:Min(value = 1, message = "수량은 1 이상이어야 합니다.")
-    val quantity: Int = 1,
+    val quantity: Int,
 
     @field:Min(value = 1, message = "인원 수는 1 이상이어야 합니다.")
-    val peopleCount: Int = 1,
+    val peopleCount: Int,
 
     @field:NotNull(message = "주문 시간은 필수입니다.")
     val orderDateTime: LocalDateTime,

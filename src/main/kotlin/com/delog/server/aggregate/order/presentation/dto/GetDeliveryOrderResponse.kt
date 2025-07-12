@@ -5,7 +5,7 @@ import com.delog.server.aggregate.order.domain.FoodType
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
-data class GetDeliveryOrderDto(
+data class GetDeliveryOrderResponse(
     val id: Long,
     val menuName: String,
     val price: BigDecimal,

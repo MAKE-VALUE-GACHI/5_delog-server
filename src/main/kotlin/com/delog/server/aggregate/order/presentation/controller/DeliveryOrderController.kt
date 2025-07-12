@@ -1,8 +1,8 @@
 package com.delog.server.aggregate.order.presentation.controller
 
-import com.delog.server.aggregate.order.presentation.dto.CreateDeliveryOrderDto
-import com.delog.server.aggregate.order.presentation.dto.GetDeliveryOrderDto
-import com.delog.server.aggregate.order.presentation.dto.UpdateDeliveryOrderDto
+import com.delog.server.aggregate.order.presentation.dto.CreateDeliveryOrderRequest
+import com.delog.server.aggregate.order.presentation.dto.GetDeliveryOrderResponse
+import com.delog.server.aggregate.order.presentation.dto.UpdateDeliveryOrderRequest
 import com.delog.server.aggregate.order.presentation.mapper.DeliveryOrderMapper
 import com.delog.server.aggregate.order.service.DeliveryOrderService
 import jakarta.validation.Valid
@@ -26,21 +26,21 @@ class DeliveryOrderController(
 ) {
 
     @PostMapping
-    fun createOrder(@Valid @RequestBody request: CreateDeliveryOrderDto): ResponseEntity<GetDeliveryOrderDto> {
+    fun createOrder(@Valid @RequestBody request: CreateDeliveryOrderRequest): ResponseEntity<GetDeliveryOrderResponse> {
         val createdEntity = deliveryOrderService.createOrder(request)
         val response = deliveryOrderMapper.toResponse(createdEntity)
         return ResponseEntity.status(HttpStatus.CREATED).body(response)
     }
 
     @GetMapping("/{id}")
-    fun getOrderById(@PathVariable id:Long): ResponseEntity<GetDeliveryOrderDto> {
+    fun getOrderById(@PathVariable id:Long): ResponseEntity<GetDeliveryOrderResponse> {
         val entity = deliveryOrderService.findOrderById(id)
         val response = deliveryOrderMapper.toResponse(entity)
         return ResponseEntity.ok(response)
     }
 
     @GetMapping
-    fun getAllOrders(): ResponseEntity<List<GetDeliveryOrderDto>> {
+    fun getAllOrders(): ResponseEntity<List<GetDeliveryOrderResponse>> {
         val orders = deliveryOrderService.findAllOrders()
         val response = orders.map { deliveryOrderMapper.toResponse(it) }
         return ResponseEntity.ok(response)
@@ -55,8 +55,8 @@ class DeliveryOrderController(
     @PutMapping("/{id}")
     fun updateOrder(
         @PathVariable id:Long,
-        @Valid @RequestBody request: UpdateDeliveryOrderDto
-    ): ResponseEntity<GetDeliveryOrderDto> {
+        @Valid @RequestBody request: UpdateDeliveryOrderRequest
+    ): ResponseEntity<GetDeliveryOrderResponse> {
         val updatedEntity = deliveryOrderService.updateOrder(id, request)
         val response = deliveryOrderMapper.toResponse(updatedEntity)
         return ResponseEntity.ok(response)
