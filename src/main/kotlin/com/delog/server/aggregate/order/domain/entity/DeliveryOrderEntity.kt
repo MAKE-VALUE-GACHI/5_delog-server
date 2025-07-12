@@ -27,19 +27,19 @@ class DeliveryOrderEntity (
     val id:Long = 0L,
 
     @Column(nullable = false)
-    val menuName: String,
+    var menuName: String,
 
     @Column(nullable = false)
-    val price: BigDecimal,
+    var price: BigDecimal,
 
     @Column(nullable = false)
-    val quantity: Int,
+    var quantity: Int,
 
     @Column(nullable = false)
-    val peopleCount: Int,
+    var peopleCount: Int,
 
     @Column(nullable = false)
-    val orderDateTime: LocalDateTime,
+    var orderDateTime: LocalDateTime,
 
     @Enumerated(EnumType.STRING)
     var category: FoodType?,

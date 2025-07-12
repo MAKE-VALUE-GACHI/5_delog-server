@@ -3,6 +3,7 @@ package com.delog.server.aggregate.order.service
 import com.delog.server.aggregate.order.domain.entity.DeliveryOrderEntity
 import com.delog.server.aggregate.order.persistence.jpa.repository.DeliveryOrderRepository
 import com.delog.server.aggregate.order.presentation.dto.CreateDeliveryOrderDto
+import com.delog.server.aggregate.order.presentation.dto.UpdateDeliveryOrderDto
 import com.delog.server.aggregate.order.presentation.mapper.DeliveryOrderMapper
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
@@ -36,6 +37,25 @@ class DeliveryOrderService(
             throw EntityNotFoundException("해당 ID의 주문을 찾을 수 없습니다: $id")
         }
         deliveryOrderRepository.deleteById(id)
+    }
+
+    @Transactional
+    fun updateOrder(id:Long, request: UpdateDeliveryOrderDto): DeliveryOrderEntity {
+        val existingEntity = findOrderById(id)
+
+        existingEntity.apply {
+            this.menuName = request.menuName
+            this.price = request.price
+            this.quantity = request.quantity
+            this.peopleCount = request.peopleCount
+            this.orderDateTime = request.orderDateTime
+            this.category = request.category
+            this.imageUrl = request.imageUrl
+            this.platform = request.platform
+            this.memo = request.memo
+            this.rating = request.rating
+        }
+        return existingEntity
     }
 
 }

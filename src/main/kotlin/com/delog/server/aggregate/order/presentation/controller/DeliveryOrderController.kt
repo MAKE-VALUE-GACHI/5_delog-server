@@ -2,6 +2,7 @@ package com.delog.server.aggregate.order.presentation.controller
 
 import com.delog.server.aggregate.order.presentation.dto.CreateDeliveryOrderDto
 import com.delog.server.aggregate.order.presentation.dto.GetDeliveryOrderDto
+import com.delog.server.aggregate.order.presentation.dto.UpdateDeliveryOrderDto
 import com.delog.server.aggregate.order.presentation.mapper.DeliveryOrderMapper
 import com.delog.server.aggregate.order.service.DeliveryOrderService
 import jakarta.validation.Valid
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -48,5 +50,15 @@ class DeliveryOrderController(
     fun deleteOrder(@PathVariable id:Long): ResponseEntity<Void> {
         deliveryOrderService.deleteOrder(id)
         return ResponseEntity.noContent().build()
+    }
+
+    @PutMapping("/{id}")
+    fun updateOrder(
+        @PathVariable id:Long,
+        @Valid @RequestBody request: UpdateDeliveryOrderDto
+    ): ResponseEntity<GetDeliveryOrderDto> {
+        val updatedEntity = deliveryOrderService.updateOrder(id, request)
+        val response = deliveryOrderMapper.toResponse(updatedEntity)
+        return ResponseEntity.ok(response)
     }
 }
