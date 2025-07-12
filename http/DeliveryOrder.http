@@ -1,0 +1,61 @@
+### ========================================
+### Delivery Order API Test
+### ========================================
+
+# 변수 설정 (테스트할 서버 주소)
+@host = http://localhost:8080
+@api_prefix = {{host}}/api/orders
+
+
+### 1. Delivery Order 생성
+# @name: createOrder
+POST {{api_prefix}}
+Content-Type: application/json
+
+{
+  "menuName": "마라샹궈",
+  "price": 25000,
+  "quantity": 1,
+  "peopleCount": 2,
+  "orderDateTime": "2024-07-12T19:30:00",
+  "category": "CHINESE_FOOD",
+  "imageUrl": "https://example.com/images/marashangguo.jpg",
+  "platform": "BAEMIN",
+  "memo": "옥수수면 추가, 맵기는 2단계로!",
+  "rating": 5
+}
+
+
+### 2. 단일 주문 조회 테스트
+# 이전에 생성된 주문의 ID를 사용하여 조회
+GET {{api_prefix}}/{{orderId}}
+Accept: application/json
+
+
+### 3. 모든 주문 조회 테스트
+GET {{api_prefix}}
+Accept: application/json
+
+
+### 4. 주문 수정 테스트
+# {{orderId}} 변수를 사용하여 특정 주문을 수정
+PUT {{api_prefix}}/{{orderId}}
+Content-Type: application/json
+
+{
+  "menuName": "마라샹궈 (순한맛)",
+  "price": 28000,
+  "quantity": 1,
+  "peopleCount": 2,
+  "orderDateTime": "2024-07-12T19:35:00",
+  "category": "CHINESE_FOOD",
+  "imageUrl": "https://example.com/images/marashangguo.jpg",
+  "platform": "BAEMIN",
+  "memo": "옥수수면, 분모자 추가! 맵기 1단계로 변경",
+  "rating": 4
+}
+
+
+### 5. 주문 삭제 테스트
+# {{orderId}} 변수를 사용하여 특정 주문을 삭제
+DELETE {{api_prefix}}/{{orderId}}
