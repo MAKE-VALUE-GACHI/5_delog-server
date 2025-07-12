@@ -1,0 +1,16 @@
+### 주문 생성 테스트
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "menuName": "마라샹궈",
+  "price": 25000,
+  "quantity": 1,
+  "peopleCount": 2,
+  "orderDateTime": "2025-07-12T19:30:00",
+  "category": "CHINESE_FOOD",
+  "imageUrl": "https://example.com/images/marashangguo.jpg",
+  "platform": "BAEMIN",
+  "memo": "옥수수면 추가, 맵기는 2단계로!",
+  "rating": 5
+}
