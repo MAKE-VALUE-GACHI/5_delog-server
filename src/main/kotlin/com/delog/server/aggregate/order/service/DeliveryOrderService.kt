@@ -30,4 +30,12 @@ class DeliveryOrderService(
         return deliveryOrderRepository.findAll()
     }
 
+    @Transactional
+    fun deleteOrder(id: Long) {
+        if (!deliveryOrderRepository.existsById(id)) {
+            throw EntityNotFoundException("해당 ID의 주문을 찾을 수 없습니다: $id")
+        }
+        deliveryOrderRepository.deleteById(id)
+    }
+
 }
