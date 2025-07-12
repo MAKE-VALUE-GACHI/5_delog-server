@@ -7,6 +7,8 @@ import com.delog.server.aggregate.order.service.DeliveryOrderService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,5 +27,19 @@ class DeliveryOrderController(
         val createdEntity = deliveryOrderService.createOrder(request)
         val response = deliveryOrderMapper.toResponse(createdEntity)
         return ResponseEntity.status(HttpStatus.CREATED).body(response)
+    }
+
+    @GetMapping("/{id}")
+    fun getOrderById(@PathVariable id:Long): ResponseEntity<GetDeliveryOrderDto> {
+        val entity = deliveryOrderService.findOrderById(id)
+        val response = deliveryOrderMapper.toResponse(entity)
+        return ResponseEntity.ok(response)
+    }
+
+    @GetMapping
+    fun getAllOrders(): ResponseEntity<List<GetDeliveryOrderDto>> {
+        val orders = deliveryOrderService.findAllOrders()
+        val response = orders.map { deliveryOrderMapper.toResponse(it) }
+        return ResponseEntity.ok(response)
     }
 }
