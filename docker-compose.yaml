@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: mysql-gachi
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./volumes/mysql/conf.d:/etc/mysql/conf.d
+      - ./volumes/mysql/data:/var/lib/mysql
+      - ./volumes/mysql/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - TZ=Asia/Seoul
+      - MYSQL_DATABASE=gachi
+      - MYSQL_ROOT_PASSWORD=user
+      - MYSQL_USER=users
+      - MYSQL_PASSWORD=password
+    networks:
+      - gachi
+
+networks:
+  gachi:
+    driver: bridge
